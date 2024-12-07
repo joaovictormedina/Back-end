@@ -1,26 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserModule } from './user/user.module';
-import { AuthModule } from './auth/auth.module';
-import { PointsModule } from './point/points.module';
+import { User } from './user/user.entity'; // Ajuste o caminho conforme necessário
+import { AppDataSource } from './AppDataSource'; // Caminho correto do arquivo que contém a configuração do TypeORM
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      url: 'postgresql://plutowtechdb_owner:X5mdGkMWC4tc@ep-morning-grass-a5r80ze5.us-east-2.aws.neon.tech/plutowtechdb?sslmode=require',
-      autoLoadEntities: true,
-      synchronize: true,
-      ssl: true,
-      extra: {
-        ssl: {
-          rejectUnauthorized: false,
-        },
-      },
-    }),
-    UserModule,
-    AuthModule,
-    PointsModule,
+    TypeOrmModule.forRoot(AppDataSource), // Usa a configuração de DataSource exportada do AppDataSource
+    TypeOrmModule.forFeature([User]), // Registra a entidade User para ser utilizada no módulo
   ],
 })
 export class AppModule {}
