@@ -5,6 +5,6 @@ export class Rescue {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ nullable: true })
   status: string;
 }
