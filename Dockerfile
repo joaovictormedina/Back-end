@@ -1,14 +1,19 @@
-# Passo 1: Construção
+# Etapa 1: Build
+FROM node:16 AS build
+
 WORKDIR /usr/src/app
+
+# Copiar o package.json e package-lock.json para instalar dependências
+COPY package*.json ./
+RUN npm install
+
+# Copiar o código-fonte do projeto
 COPY . .
 
-# Executar o TypeScript para compilar
+# Rodar o comando de build para compilar o TypeScript
 RUN npm run build
 
-# Verificar a estrutura de arquivos e diretórios após a compilação
-RUN ls -l /usr/src/app
-
-# Verificar se o diretório dist foi gerado
+# Verificar se o diretório dist foi criado
 RUN ls -l /usr/src/app/dist
 
 # Etapa 2: Produção
