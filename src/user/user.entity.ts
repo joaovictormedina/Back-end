@@ -13,7 +13,7 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ nullable: true })
   name: string;
 
   @Column({ unique: true, type: 'varchar', nullable: true })
