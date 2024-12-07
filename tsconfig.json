@@ -1,29 +1,30 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "declaration": true,
-    "removeComments": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "target": "ES6",
-    "sourceMap": true,
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "esModuleInterop": true,       
-    "skipLibCheck": true,           
-    "strict": true,
-    "baseUrl": "./",
-    "incremental": true,
-    "strictNullChecks": false,
-    "noImplicitAny": false,
-    "strictBindCallApply": false,
-    "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "module": "commonjs",                // Usar CommonJS para compatibilidade com o Node.js
+    "target": "ES6",                     // Usar ECMAScript 6 como alvo
+    "declaration": true,                 // Gerar arquivos de declaração (.d.ts)
+    "removeComments": true,              // Remover comentários do código gerado
+    "emitDecoratorMetadata": true,       // Emitir metadados para decoradores
+    "experimentalDecorators": true,      // Permitir o uso de decoradores (necessário para NestJS)
+    "allowSyntheticDefaultImports": true,// Permitir imports default sintéticos
+    "sourceMap": true,                   // Gerar arquivos de mapa de fonte (.map) para facilitar o debug
+    "outDir": "./dist",                  // Diretório de saída dos arquivos compilados
+    "rootDir": "./src",                  // Diretório de entrada dos arquivos de código fonte
+    "esModuleInterop": true,             // Ativar interoperação com módulos ECMAScript
+    "skipLibCheck": true,                // Ignorar a verificação de bibliotecas
+    "strict": true,                      // Ativar verificação estrita (todos os modos de verificação habilitados)
+    "strictNullChecks": false,           // Desabilitar a verificação de valores nulos
+    "noImplicitAny": false,              // Permitir 'any' implícito
+    "incremental": true,                 // Habilitar compilação incremental
+    "strictBindCallApply": false,        // Desabilitar a verificação estrita de bind/call/apply
+    "forceConsistentCasingInFileNames": false, // Desabilitar a verificação de consistência de maiúsculas/minúsculas
+    "noFallthroughCasesInSwitch": false // Desabilitar erro ao não colocar "break" em "switch"
   },
-  "include": ["src/**/*"],
-  
-  "exclude": ["node_modules",
-    "test/**/*"
+  "include": [
+    "src/**/*"  // Incluir todos os arquivos da pasta src para compilação
+  ],
+  "exclude": [
+    "node_modules", // Excluir a pasta node_modules
+    "test/**/*"     // Excluir qualquer pasta de testes (caso tenha)
   ]
 }
