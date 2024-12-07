@@ -8,13 +8,15 @@ import { PointsModule } from './point/points.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: process.env.DATABASE_HOST || 'localhost',
-      port: parseInt(process.env.DATABASE_PORT, 10) || 5432,
-      username: process.env.DATABASE_USERNAME || 'plutowtech',
-      password: process.env.DATABASE_PASSWORD || 'docker',
-      database: process.env.DATABASE_NAME || 'plutowtechdb',
+      url: 'postgresql://plutowtechdb_owner:X5mdGkMWC4tc@ep-morning-grass-a5r80ze5.us-east-2.aws.neon.tech/plutowtechdb?sslmode=require',
       autoLoadEntities: true,
       synchronize: true,
+      ssl: true,
+      extra: {
+        ssl: {
+          rejectUnauthorized: false,
+        },
+      },
     }),
     UserModule,
     AuthModule,
