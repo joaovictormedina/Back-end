@@ -32,7 +32,7 @@ export class User {
   })
   profession: string;
 
-  @Column({ nullable: false })
+  @Column({ nullable: true })
   password: string;
 
   @Column({ nullable: true })
