@@ -5,7 +5,8 @@
     "declaration": true,                 // Gerar arquivos de declaração (.d.ts)
     "removeComments": true,              // Remover comentários do código gerado
     "emitDecoratorMetadata": true,       // Emitir metadados para decoradores
-    "experimentalDecorators": true,      // Permitir o uso de decoradores (necessário para NestJS)
+    "experimentalDecorators": true,  
+    "noEmit": false,    // Permitir o uso de decoradores (necessário para NestJS)
     "allowSyntheticDefaultImports": true,// Permitir imports default sintéticos
     "sourceMap": true,                   // Gerar arquivos de mapa de fonte (.map) para facilitar o debug
     "outDir": "./dist",                  // Diretório de saída dos arquivos compilados
@@ -15,7 +16,6 @@
     "strict": true,                      // Ativar verificação estrita (todos os modos de verificação habilitados)
     "strictNullChecks": false,           // Desabilitar a verificação de valores nulos
     "noImplicitAny": false,              // Permitir 'any' implícito
-    "incremental": true,                 // Habilitar compilação incremental
     "strictBindCallApply": false,        // Desabilitar a verificação estrita de bind/call/apply
     "forceConsistentCasingInFileNames": false, // Desabilitar a verificação de consistência de maiúsculas/minúsculas
     "noFallthroughCasesInSwitch": false // Desabilitar erro ao não colocar "break" em "switch"
