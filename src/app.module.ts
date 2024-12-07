@@ -10,13 +10,16 @@ import { RescueModule } from './rescue/rescue.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: process.env.DATABASE_HOST || 'localhost',
-      port: parseInt(process.env.DATABASE_PORT, 10) || 5432,
-      username: process.env.DATABASE_USERNAME || 'plutowtech',
-      password: process.env.DATABASE_PASSWORD || 'docker',
-      database: process.env.DATABASE_NAME || 'plutowtechdb',
+      host: 'ep-morning-grass-a5r80ze5.us-east-2.aws.neon.tech',
+      port: 5432,
+      username: 'plutowtechdb_owner',
+      password: 'X5mdGkMWC4tc',
+      database: 'plutowtechdb',
       autoLoadEntities: true,
       synchronize: true,
+      ssl: {
+        rejectUnauthorized: false,
+      },
     }),
     UserModule,
     AuthModule,
