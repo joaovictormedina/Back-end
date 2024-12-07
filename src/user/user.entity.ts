@@ -22,7 +22,7 @@ export class User {
   @Column({ nullable: true })
   cau: string;
 
-  @Column({ unique: true })
+  @Column({ unique: true, nullable: true })
   email: string;
 
   @Column({
