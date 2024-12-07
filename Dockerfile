@@ -13,7 +13,7 @@ COPY . .
 # Rodar o comando de build para compilar o TypeScript
 RUN npm run build
 
-# Adicionar para listar o conteúdo do diretório e confirmar se o dist foi gerado
+# Verificar se o diretório dist foi criado
 RUN ls -l /usr/src/app/dist
 
 # Etapa 2: Produção
@@ -24,9 +24,6 @@ WORKDIR /usr/src/app
 # Copiar os arquivos necessários da etapa de build
 COPY --from=build /usr/src/app/dist /usr/src/app/dist
 COPY --from=build /usr/src/app/package*.json /usr/src/app/
-
-# Adicionar para listar o conteúdo do diretório após a cópia
-RUN ls -l /usr/src/app/dist
 
 # Instalar dependências de produção
 RUN npm install --only=production

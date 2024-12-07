@@ -60,9 +60,14 @@ export class AuthController {
         id: user.id,
         access_token: token,
       };
-    } catch (error) {
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        throw new BadRequestException(
+          error.message || 'Erro ao tentar recuperar a senha.',
+        );
+      }
       throw new BadRequestException(
-        error.message || 'Erro ao tentar recuperar a senha.',
+        'Erro desconhecido ao tentar recuperar a senha.',
       );
     }
   }

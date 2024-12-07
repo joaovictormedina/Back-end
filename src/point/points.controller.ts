@@ -29,8 +29,11 @@ export class PointsController {
         Number(userId),
       );
       return pointsData;
-    } catch (error) {
-      throw new HttpException(error.message, HttpStatus.NOT_FOUND);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        throw new HttpException(error.message, HttpStatus.NOT_FOUND);
+      }
+      throw new HttpException('Erro desconhecido', HttpStatus.NOT_FOUND);
     }
   }
 
@@ -50,8 +53,11 @@ export class PointsController {
     try {
       await this.pointsService.addPoints(Number(userId), amount);
       return { message: `${amount} pontos adicionados com sucesso.` };
-    } catch (error) {
-      throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+      }
+      throw new HttpException('Erro desconhecido', HttpStatus.BAD_REQUEST);
     }
   }
 
@@ -72,8 +78,11 @@ export class PointsController {
       // Chama o serviço para remover os pontos
       await this.pointsService.removePoints(Number(userId), amount);
       return { message: `${amount} pontos removidos com sucesso.` };
-    } catch (error) {
-      throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+      }
+      throw new HttpException('Erro desconhecido', HttpStatus.BAD_REQUEST);
     }
   }
 }
