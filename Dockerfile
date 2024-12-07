@@ -1,23 +1,32 @@
-# Definir a imagem base
-FROM node:16
+# Etapa 1: Build
+FROM node:16 AS build
 
-# Definir o diretório de trabalho dentro do contêiner
 WORKDIR /usr/src/app
 
-# Copiar os arquivos de configuração e dependências para dentro do contêiner
+# Copiar o package.json e package-lock.json para instalar dependências
 COPY package*.json ./
-
-# Instalar as dependências
 RUN npm install
 
-# Copiar o restante dos arquivos do projeto
+# Copiar o código-fonte do projeto
 COPY . .
 
-# Compilar o projeto
+# Rodar o comando de build para compilar o TypeScript
 RUN npm run build
 
-# Expor a porta que o NestJS vai rodar
+# Etapa 2: Produção
+FROM node:16 AS production
+
+WORKDIR /usr/src/app
+
+# Copiar os arquivos necessários da etapa de build
+COPY --from=build /usr/src/app/dist /usr/src/app/dist
+COPY --from=build /usr/src/app/package*.json /usr/src/app/
+
+# Instalar dependências de produção
+RUN npm install --only=production
+
+# Expor a porta da aplicação
 EXPOSE 3000
 
-# Comando para rodar a aplicação
+# Rodar o servidor
 CMD ["npm", "run", "start:prod"]
