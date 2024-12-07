@@ -19,7 +19,7 @@ export class User {
   @Column({ unique: true, type: 'varchar', nullable: true })
   cpf: string;
 
-  @Column()
+  @Column({ nullable: true })
   cau: string;
 
   @Column({ unique: true })
