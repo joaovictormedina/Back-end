@@ -29,11 +29,8 @@ export class PointsController {
         Number(userId),
       );
       return pointsData;
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        throw new HttpException(error.message, HttpStatus.NOT_FOUND);
-      }
-      throw new HttpException('Erro desconhecido', HttpStatus.NOT_FOUND);
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.NOT_FOUND);
     }
   }
 
@@ -53,36 +50,33 @@ export class PointsController {
     try {
       await this.pointsService.addPoints(Number(userId), amount);
       return { message: `${amount} pontos adicionados com sucesso.` };
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
-      }
-      throw new HttpException('Erro desconhecido', HttpStatus.BAD_REQUEST);
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
     }
   }
 
-  @Post('remove/:userId')
+  @Post('remove/:recipientId')
   async removePoints(
-    @Param('userId') userId: string,
+    @Param('recipientId') recipientId: string,
     @Body('amount') amount: number,
   ) {
     // Verifica se os parâmetros são válidos
-    if (!userId || !amount || isNaN(amount) || amount <= 0) {
+    if (!recipientId || isNaN(Number(amount)) || Number(amount) <= 0) {
       throw new HttpException(
-        'Parâmetros inválidos. Verifique se o userId e a quantidade são válidos.',
+        'Parâmetros inválidos. Forneça um ID de destinatário válido e uma quantidade positiva.',
         HttpStatus.BAD_REQUEST,
       );
     }
 
     try {
       // Chama o serviço para remover os pontos
-      await this.pointsService.removePoints(Number(userId), amount);
+      await this.pointsService.removePoints(
+        Number(recipientId),
+        Number(amount),
+      );
       return { message: `${amount} pontos removidos com sucesso.` };
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
-      }
-      throw new HttpException('Erro desconhecido', HttpStatus.BAD_REQUEST);
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 }

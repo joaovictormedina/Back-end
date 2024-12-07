@@ -13,13 +13,13 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'varchar', length: 255, nullable: false })
+  @Column()
   name: string;
 
   @Column({ unique: true, type: 'varchar', nullable: true })
   cpf: string;
 
-  @Column({ type: 'varchar', length: 255, nullable: false })
+  @Column()
   cau: string;
 
   @Column({ unique: true })
@@ -30,7 +30,7 @@ export class User {
     enum: ['engenheiro', 'arquiteto', 'consultor', 'loja', 'escritorio'],
     default: 'engenheiro',
   })
-  userType: string;
+  profession: string;
 
   @Column({ nullable: false })
   password: string;
@@ -75,7 +75,7 @@ export class User {
     }
   }
 
-  // Antes de inserir, criptografar a senha.
+  // Antes de inserir, criptografar a senha
   @BeforeInsert()
   async hashPassword() {
     this.validatePassword();
