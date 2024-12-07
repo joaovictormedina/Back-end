@@ -9,10 +9,10 @@ export class Offer {
   @ManyToOne(() => Product, (product) => product.offers)
   product: Product;
 
-  @Column()
+  @Column({ nullable: true })
   days: number;
 
-  @Column()
+  @Column({ nullable: true })
   points: number;
 
   @ManyToOne(() => Product, (product) => product.offers, {
