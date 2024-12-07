@@ -16,7 +16,7 @@ import { RescueModule } from './rescue/rescue.module';
       password: 'X5mdGkMWC4tc',
       database: 'plutowtechdb',
       autoLoadEntities: true,
-      synchronize: true,
+      synchronize: false,
       ssl: {
         rejectUnauthorized: false,
       },

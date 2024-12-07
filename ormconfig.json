@@ -8,7 +8,7 @@
   "entities": [
     "src/**/*.entity.ts"
   ],
-  "synchronize": true,
+  "synchronize": false,
   "logging": true,
   "ssl": true,
   "extra": {
