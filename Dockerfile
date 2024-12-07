@@ -13,6 +13,9 @@ COPY . .
 # Rodar o comando de build para compilar o TypeScript
 RUN npm run build
 
+# Adicionar para listar o conteúdo do diretório e confirmar se o dist foi gerado
+RUN ls -l /usr/src/app/dist
+
 # Etapa 2: Produção
 FROM node:16 AS production
 
@@ -22,11 +25,12 @@ WORKDIR /usr/src/app
 COPY --from=build /usr/src/app/dist /usr/src/app/dist
 COPY --from=build /usr/src/app/package*.json /usr/src/app/
 
+# Adicionar para listar o conteúdo do diretório após a cópia
+RUN ls -l /usr/src/app/dist
+
 # Instalar dependências de produção
 RUN npm install --only=production
 
-# Expor a porta da aplicação
 EXPOSE 3000
 
-# Rodar o servidor
 CMD ["npm", "run", "start:prod"]
